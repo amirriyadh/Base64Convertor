@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>base64</title>
+	 <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" type="text/css" href="semantic.min.css">
+   	<style type="text/css">
+   		textarea {
+   			padding: 10px !important;	
+
+   		}
+   		.container {
+   			margin-top: 60px;
+   		}
+   		body {
+   			background-color: #ede9ce !important;
+   		}
+   		.encode {
+   			background-color: #935347 !important;
+   			
+   			margin-right: 20px !important;
+   		}
+   		.decode {
+   			background-color: #64706c !important;
+   			margin-left: 20px !important;
+   			margin-right: 40px !important;
+   		}
+   		h1 {
+   			font-size: 40px !important;
+   		}
+   	</style>
+<body>
+<div class="ui container form">
+	<div class="ui sizer vertical segment">
+		<h1 class="ui huge header" >Base64 Convertor</h1>
+	</div>
+
+	<!-- input -->
+	<textarea  id="data" placeholder="Type here" class="ui card fluid " rows="10" ></textarea>
+
+	<div class="ui  right floated button label">
+	  Length:
+	  <div class="detail" id="inputLength"></div>
+	</div> <br>
+
+	<!-- buttons -->
+	<div class="buttons" >
+		<div class="ui animated red button encode" tabindex="0" onclick="convert('enc')">
+			<div class="visible content "style="transition: 0.7s">Encode</div>
+			<div class="hidden content" style="transition: 0.7s">
+				to base64
+			</div>
+		</div>
+
+		<div class="ui animated violet  button decode" tabindex="0" onclick="convert('dec')">
+			<div class="visible content"style="transition: 0.7s">Decode</div>
+			<div class="hidden content" style="transition: 0.7s">
+				to text
+			</div>
+		</div>
+		<input type="checkbox" name="url"  id="safeURL" class="ui floated right button"> URL Safe
+	</div>
+	
+
+	<!-- output -->
+	<div class="ui divider"></div>
+	<textarea id="result"  placeholder="Ouput" class="ui card fluid" rows="10" ></textarea>
+	<div class="ui right floated button label">
+	  Length:
+	  <div class="detail" id="outputLength"></div>
+	</div> <br>
+	<div class="ui error message" id="errorAlert">
+	    <div class="header">Error</div>
+	    <p id="errorMsg"></p>
+  	</div>
+
+</div>
+
+
+<script src="./base64.min.js"></script>
+<script type="text/javascript">
+	document.getElementById("errorAlert").style.display = "none" ;
+	function convert (type) {
+		var data = document.getElementById("data").value ;
+		var result ;
+		if (data != "") {
+			document.getElementById("errorAlert").style.display = "none" ;
+			if(type == "enc"){
+				if(document.getElementById('safeURL').checked)
+						result = Base64.encodeURI(data);
+					else 
+						result = Base64.encode(data);
+			}
+			else { 
+				result = Base64.decode(data);}
+
+			document.getElementById('result').value = result; 	
+
+			document.getElementById("inputLength").innerHTML = data.length; 
+			document.getElementById("outputLength").innerHTML = result.length; 
+
+		} else{
+			document.getElementById("errorAlert").innerHTML = "Input field is required";
+			document.getElementById("errorAlert").style.display = "block" ;
+		}
+	}
+
+</script>
+</body>
+</html>
+
+
