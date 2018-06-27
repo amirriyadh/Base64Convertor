@@ -4,7 +4,7 @@ Online base64 convertor
 
 ## Features
 * Encode ```Text -> Base64```.
-* Encode ```Base64 -> Text```.
+* Decode ```Base64 -> Text```.
 * Show characters length for both text and base64 .
 * UTF-8 Support.
 
